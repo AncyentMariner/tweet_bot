@@ -54,9 +54,9 @@ function sendTweet() {
 }
 
 function sendTweetsContinusouly() {
-  setInterval(() => {
-    let timePeriod = getRandomIntInclusive(240000, 900000);
+  let timePeriod = getRandomIntInclusive(240000, 900000);
 
+  setInterval(() => {
     try {
       sendTweet();
     } catch(e) {
