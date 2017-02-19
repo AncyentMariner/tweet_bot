@@ -1,0 +1,16 @@
+{
+  "name": "tweet_at_despot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "express": "^4.14.1",
+    "twit": "^2.2.5"
+  }
+}
