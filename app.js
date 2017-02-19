@@ -32,26 +32,12 @@ function getRandomIntInclusive(min, max) {
 
 function sendTweet() {
   client.get('https://api.chucknorris.io/jokes/random', (data, status) => {
-    var sentence = data.value.split(' ');
+    let sentence = data.value.split(' ');
     let index = getRandomIntInclusive(0, sentence.length);
-    let twitterStatus = `you are a treasonous ${sentence[index]}`;
+    let twitterStatus = `.@realDonaldTrump you are a treasonous ${sentence[index]}`;
 
-    // T.post('statuses/update', {status: twitterStatus}, (error, tweet, respsonse) => {
-    //   if (error) console.log(error);
-    //   console.log('tweeted :)', tweet);
-    // });
-  });
-}
-
-
-function tweet() {
-  client.get('https://api.chucknorris.io/jokes/random', (data, status) => {
-    var sentence = data.value.split(' ');
-    let index = getRandomIntInclusive(0, sentence.length);
-    let twitterStatus = `you are a treasonous ${sentence[index]}`;
-
-    var image_path = './image.png';
-    var b64content = fs.readFileSync(image_path, { encoding: 'base64' });
+    let image_path = './image.png';
+    let b64content = fs.readFileSync(image_path, { encoding: 'base64' });
 
     T.post('media/upload', { media_data: b64content }, (err, data, response) => {
       if (err) console.log(err);
@@ -67,13 +53,16 @@ function tweet() {
   });
 }
 
+function sendTweetsContinusouly() {
+  setInterval(() => {
+    let timePeriod = getRandomIntInclusive(240000, 900000);
 
-tweet();
+    try {
+      sendTweet();
+    } catch(e) {
+      console.log(e);
+    }
+  }, timePeriod);
+}
 
-// setInterval(() => {
-//   try {
-//     sendTweet();
-//   } catch(e) {
-//     console.log(e);
-//   }
-// }, 120000);
+sendTweetsContinusouly();
