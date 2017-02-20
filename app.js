@@ -41,17 +41,18 @@ function sendTweet() {
 
     T.post('media/upload', { media_data: b64content }, (err, data, response) => {
       if (err) console.log(err);
+      // console.log(data);
 
-      console.log(data);
+      T.post('statuses/update', {status: twitterStatus, media_ids: data.media_id_string}, (err, tweet, respsonse) => {
+        if (err) console.log(err);
 
-      T.post('statuses/update', {status: twitterStatus, media_ids: data.media_id_string}, (error, tweet, respsonse) => {
-        if (error) console.log(error);
-
-        console.log('tweeted :)', tweet);
+        console.log('tweeted :)');
       });
     });
   });
 }
+
+sendTweet();
 
 function sendTweetsContinusouly() {
   let timePeriod = getRandomIntInclusive(240000, 900000);
