@@ -30,6 +30,14 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+const StringDecoder = require('string_decoder').StringDecoder;
+const decoder = new StringDecoder('utf8');
+
+client.get('http://randomword.setgetgo.com/get.php', (data) => {
+  console.log(decoder.write(data));
+});
+
+
 function sendTweet() {
   client.get('https://api.chucknorris.io/jokes/random', (data, status) => {
     let sentence = data.value.split(' ');
